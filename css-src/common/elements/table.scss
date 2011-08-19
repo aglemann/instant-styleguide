@@ -1,0 +1,39 @@
+table {
+	border-collapse: collapse; border-spacing: 0;
+
+	caption {
+	}
+	
+	tbody {
+	}
+	
+	td {
+		background: #fff; border: 1px #999 solid; color: #666; padding: 10px;
+		
+		&:hover {
+			background: #dfedfa;
+		}
+	}
+
+	tfoot {
+		td {
+			background: #999; border: 0; color: #fff;
+
+			&:hover {
+				background: #999;
+			}
+		}
+	}
+	
+	th {
+		background: #666; color: #fff; padding: 10px; text-align: left;
+	}
+	
+	thead {
+	}
+	
+	tr {
+	}
+}
+
+

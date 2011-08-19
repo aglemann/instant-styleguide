@@ -1,0 +1,16 @@
+/* line 1, ../../../css-src/common/elements/image.scss */
+figcaption {
+  display: block;
+}
+
+/* line 5, ../../../css-src/common/elements/image.scss */
+figure {
+  display: block;
+  margin: 0;
+}
+
+/* line 9, ../../../css-src/common/elements/image.scss */
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}

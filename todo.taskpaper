@@ -1,0 +1,50 @@
+- higher fid wireframe
+what
+where
+importance
+- layout
+header
+main
+sidebar/columns
+footer/rows
+- defaults
+- templates/chrome vs content
+- naming (on wireframes)
+Brevity: every byte counts, so keep classes as short as possible.
+Clarity: expected behavior/style should be immediately obvious.
+Semantic: what an object is matters more than what it looks like.
+Generic: the name should be true for most sites. Overly specific names reduce the number of use cases or cause semantic classes to be used in a non-semantic way.
+- remember colors (red error)
+
+1. Break pieces down into classes of patterns:
+- nav
+- lists
+- headings
+- form
+label
+input
+button
+fieldset
+legend
+- links
+- text
+emphasis
+strong
+light, small, de-emphasized, quiet
+- promo
+- table
+header
+cell
+
+2. Further define into subclasses within each pattern:
+- heading, links
+primary
+secondary
+- list
+horizontal
+vertical
+
+3. Compare with existing skins:
+- reuse
+- extend
+- create

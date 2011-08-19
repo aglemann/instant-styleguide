@@ -1,0 +1,21 @@
+@import "/common/elements/heading";
+
+h1.logo {
+	@include ir;
+	background: url(/images/h1-logo.jpg); height: 170px; width: 130px;
+}
+
+h2 {
+	@include background-image(url(/images/h2.png), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%));
+	color: #fff; font-size: 14px; font-weight: normal; padding: 8px 12px; text-transform: uppercase;
+}
+
+h3 {
+	@include background-image(url(/images/h2.png), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%));
+	color: #fff; font-size: 14px; font-weight: normal; padding: 8px 12px; text-transform: uppercase;
+}
+
+h3.em {
+	@include background-image(url(/images/h2.png), linear-gradient(rgba(0.76, 0.06, 0.06, 0.2), rgba(0.55, 0.06, 0.05, 0.7) 50%));
+	color: #fff; font-size: 14px; font-weight: normal; padding: 8px 12px; text-transform: uppercase;
+}

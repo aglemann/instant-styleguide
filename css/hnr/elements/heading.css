@@ -1,0 +1,76 @@
+/* line 3, ../../../css-src/common/elements/heading.scss */
+h1 {
+  font-size: 242.86%;
+}
+
+/* line 7, ../../../css-src/common/elements/heading.scss */
+h2 {
+  font-size: 185.71%;
+}
+
+/* line 11, ../../../css-src/common/elements/heading.scss */
+h3 {
+  font-size: 128.57%;
+}
+
+/* line 15, ../../../css-src/common/elements/heading.scss */
+h4 {
+  font-size: 100%;
+}
+
+/* line 3, ../../../css-src/hnr/elements/heading.scss */
+h1.logo {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+  background: url(/images/h1-logo.jpg);
+  height: 170px;
+  width: 130px;
+}
+
+/* line 8, ../../../css-src/hnr/elements/heading.scss */
+h2 {
+  background-image: url(/images/h2.png), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.2)), color-stop(50%, rgba(0, 0, 0, 0.7)));
+  background-image: url(/images/h2.png), -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), -moz-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), -o-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 8px 12px;
+  text-transform: uppercase;
+}
+
+/* line 13, ../../../css-src/hnr/elements/heading.scss */
+h3 {
+  background-image: url(/images/h2.png), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.2)), color-stop(50%, rgba(0, 0, 0, 0.7)));
+  background-image: url(/images/h2.png), -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), -moz-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), -o-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 8px 12px;
+  text-transform: uppercase;
+}
+
+/* line 18, ../../../css-src/hnr/elements/heading.scss */
+h3.em {
+  background-image: url(/images/h2.png), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.2)), color-stop(50%, rgba(0, 0, 0, 0.7)));
+  background-image: url(/images/h2.png), -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), -moz-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), -o-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  background-image: url(/images/h2.png), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7) 50%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 8px 12px;
+  text-transform: uppercase;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Index of <%=url%></title>
+	</head>
+	<body>
+		<h1>Index of <%=url%></h1>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Last modified</th>
+				<th>Size</th>
+			</tr>
+			<tr>
+				<th colspan="3"><hr></th>
+			</tr>
+			<tr>
+				<td><a href="..">..</a></td>
+				<td align="right"</td>
+				<td align="right"> - </td>
+			</tr>
+			<% for (var i in listing){ %>
+			<tr>
+				<td><a href="<%=listing[i].uri%>"><%=listing[i].name%></a></td>
+				<td align="right"><%=listing[i].ctime%></td>
+				<td align="right"><%=listing[i].size%></td>
+			</tr>
+			<% } %>
+			<tr>
+				<th colspan="3"><hr></th>
+			</tr>
+		</table>
+	</body>
+</html>

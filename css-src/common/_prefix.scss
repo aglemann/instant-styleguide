@@ -1,0 +1,19 @@
+@import "compass/css3";
+
+// For image replacement
+@mixin ir { 
+	display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; 
+}
+
+// Contain floats: h5bp.com/q
+@mixin clearfix {
+	zoom: 1;
+	
+	&:after,
+	&:before {
+		content: ""; display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
