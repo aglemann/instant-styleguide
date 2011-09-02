@@ -1,0 +1,21 @@
+{
+  "name": "instant-styleguide",
+  "version": "0.0.1",
+  "description": "Instantly present CSS stylesheets as HTML styleguides.",
+  "keywords": ["css", "stylesheet", "css2html", "styleguide"],
+  "homepage": "https://github.com/aglemann/instant-styleguide",
+  "author": "Aeron Glemann <aeron.glemann@gmail.com> (http://www.electricprism.com/aeron)",
+  "files": ["lib", "tmpl"],
+  "main": "main",
+  "directories": {
+    "lib": "./lib",	
+    "tmpl": "./tmpl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aglemann/instant-styleguide.git"
+  },
+  "engines": {
+    "node": "~v0.4.10"
+  }
+}
