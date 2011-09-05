@@ -1,6 +1,6 @@
 {
   "name": "instant-styleguide",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Instantly present CSS stylesheets as HTML styleguides.",
   "keywords": ["css", "stylesheet", "css2html", "styleguide", "instaguide", "instant styleguide"],
   "homepage": "https://github.com/aglemann/instant-styleguide",
