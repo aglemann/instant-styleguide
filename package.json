@@ -1,13 +1,14 @@
 {
   "name": "instant-styleguide",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Instantly present CSS stylesheets as HTML styleguides.",
-  "keywords": ["css", "stylesheet", "css2html", "styleguide"],
+  "keywords": ["css", "stylesheet", "css2html", "styleguide", "instaguide", "instant styleguide"],
   "homepage": "https://github.com/aglemann/instant-styleguide",
   "author": "Aeron Glemann <aeron.glemann@gmail.com> (http://www.electricprism.com/aeron)",
-  "files": ["lib", "tmpl"],
+  "files": ["css", "lib", "tmpl"],
   "main": "main",
   "directories": {
+	"css": "./css",
     "lib": "./lib",	
     "tmpl": "./tmpl"
   },
