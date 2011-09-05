@@ -5,43 +5,47 @@
 		<link rel="stylesheet" href="<%=reset%>?raw=1">
 		<link rel="stylesheet" href="<%=url%>?raw=1">
 		<style type="text/css">
-			.is { background: #d7d7d7; }
-			.is-em { color: #fff; display: inline; font-size: 24px; font-weight: 400; }
-			.is-header { background: #333; color: #999; display: block; font: normal 100 21px "Helvetica Neue", Helvetica, sans-serif; margin: 0; padding: 20px; text-shadow: 0 1px 5px #000; text-transform: capitalize; }
-			.is-label { bottom: 10px; color: #999; font-size: 12px; position: absolute; right: 10px; }
-			.is-rule { background: #ededed; -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35); margin: 10px; padding: 20px; position: relative; zoom: 1; }
-			.is-rule:before, 
-			.is-rule:after { content: ""; display: table; }
-			.is-rule:after { clear: both; }
+			.instaguide { background: #d7d7d7; }
+			.instaguide-em { color: #fff; display: inline; font-size: 24px; font-weight: 400; }
+			.instaguide-header { background: #333; color: #999; display: block; font: normal 100 21px "Helvetica Neue", Helvetica, sans-serif; margin: 0; padding: 20px; text-shadow: 0 1px 5px #000; text-transform: capitalize; }
+			.instaguide-label { bottom: 10px; color: #999; font-size: 12px; position: absolute; right: 10px; }
+			.instaguide-rule { background: #ededed; -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35); margin: 10px; padding: 20px; position: relative; zoom: 1; }
+			.instaguide-rule:before { content: ""; display: table; }
+			.instaguide-rule:after { clear: both; content: ""; display: table; }
 		</style>
 		<script type="text/javascript">
-			function is(){
+			function instaguide(){
 				for (var nodes = document.body.childNodes, i = 2; i < nodes.length; i++){
 					var node = nodes[i];
 					if (node.nodeType == 1){
 						var wrapper = document.createElement('div');
-						wrapper.className = 'is-rule';
+						wrapper.className = 'instaguide-rule';
 						document.body.replaceChild(wrapper, node);
 						wrapper.appendChild(node);
 
 						var label = document.createElement('div');
-						label.className = 'is-label';
+						label.className = 'instaguide-label';
 						label.innerHTML = node.getAttribute('data-selector');
 						wrapper.appendChild(label);
 
-						node.onmouseover = function(e){
-							label.innerHTML = e.target.getAttribute('data-selector');
-						}
-						node.mouseout = function(e){
-							label.innerHTML = node.getAttribute('data-selector');
-						}
+						node.onmouseover = (function(label, node){
+							return function(e){
+								label.innerHTML = e.target.getAttribute('data-selector');
+							}
+						})(label, node);
+						node.mouseout = (function(label, node){
+							return function(e){
+								label.innerHTML = node.getAttribute('data-selector');
+							}
+						})(label, node);
 					}
 				}
 			}
 		</script>
 	</head>
-	<body class="is" onload="is()">
-		<div class="is-header"><div class="is-em"><%=style%></div> Guideline</div>		
+	<body class="instaguide" onload="instaguide()">
+		<div class="instaguide-header"><div class="instaguide-em"><%=style%></div> Guideline</div>	
+			
 		<%=html%>
 	</body>
 </html>

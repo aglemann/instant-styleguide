@@ -7,73 +7,99 @@ var http = require('http'),
 var options = {
 	host: 'localhost',
 	port: 8124,
-	reset: ''
+	reset: '/css/normalize.css'
 }
 
 function listener(request, response){
-	var pwd = path.resolve();		
-	var url = require('url').parse(request.url, true);	
-	var pathname = pwd + unescape(url.pathname);
-	var code = 200;
-	var file;
+	var pwd = path.resolve(),
+		url = require('url').parse(request.url, true),
+		pathname = pwd + unescape(url.pathname),
+		returns;
 	
-	console.log(pathname);
-	
-	if (path.existsSync(pathname)){
-		var stats = fs.statSync(pathname);
+	if (path.existsSync(pathname))
+		returns = fs.statSync(pathname).isFile() ? handleFile(url, pathname)
+			: handleListing(url, pathname);		
+	else
+		returns = handleNotFound(url);
 		
-		if (stats.isFile()){
-			file = fs.readFileSync(pathname, 'utf8');
+	response.writeHead(returns.code || 200);
+	response.end(returns.file);
+}
 
-			if (/\.css$/.test(url.pathname) && !url.query.raw){
-				var template = fs.readFileSync(path.resolve(__dirname, './tmpl/stylesheet.tmpl'), 'utf8');
-				var style = unescape(url.pathname).replace(/.*?([^\/]+)\.css$/, '$1');			
-				file = tmpl(template, { html: css2html(file, { expand: options.expand, out: 'html', populate: true, tags: options.tags }), reset: options.reset, style: style, url: request.url });
-				response.setHeader('Content-Type', 'text/html');
-			}
-			
-			if (/\.(gif|jpg|png)$/.test(url.pathname)){
-				fs.createReadStream(pathname, { flags: 'r', mode: 0666, bufferSize: 4 * 1024})
-					.addListener('data', function(chunk){
-						response.write(chunk, 'binary');
-					})
-					.addListener('close',function() {
-						response.end();
-					});
-				return;
-			}
-			
-		}
-		else {
-			var template = fs.readFileSync(path.resolve(__dirname, './tmpl/index.tmpl'), 'utf8');
-			var ls = fs.readdirSync(pathname);					
-			var listing = [];
+function getTemplate(templateName){
+	var pwd = path.resolve(),
+		pathToTemplate = path.existsSync(pwd + '/' + templateName) ? pwd + '/' + templateName
+			: path.resolve(__dirname, './tmpl/' + templateName);
+		
+	return fs.readFileSync(pathToTemplate, 'utf8');
+}
 
-			for (var i in ls){
-				var name = ls[i];
-				var stats = fs.statSync(path.normalize(pathname + '/' + name));
-				var uri = url.pathname == '/' ? name : url.pathname + '/' + name;
-				listing.push({ name: name, ctime: stats.ctime, size: stats.size, uri: uri });
-			}
-
-			file = tmpl(template, { listing: listing, url: url.pathname });
-		}		
+function handleFile(url, pathname){
+	if (/\.(gif|jpg|png)$/.test(url.pathname)){
+		fs.createReadStream(pathname, { flags: 'r', mode: 0666, bufferSize: 4 * 1024})
+			.addListener('data', function(chunk){
+				response.write(chunk, 'binary');
+			})
+			.addListener('close',function(){
+				response.end();
+			});
+		return;
 	}
-	else {
-		var template = fs.readFileSync(path.resolve(__dirname, './tmpl/404.tmpl'), 'utf8');
-		file = tmpl(template, { url: url.pathname });
-		code = 404;
+
+	var file = fs.readFileSync(pathname, 'utf8');
+
+	if (/\.css$/.test(url.pathname) && !url.query.raw){
+		var template = getTemplate('stylesheet.tmpl');
+			style = unescape(url.pathname).replace(/.*?([^\/]+)\.css$/, '$1');			
+		file = tmpl(template, { html: css2html(file, { expand: options.expand, out: 'html', populate: true, tags: options.tags }), reset: options.reset, style: style, url: url.pathname });
+		// response.setHeader('Content-Type', 'text/html');
 	}
 	
-	response.writeHead(code);
-	response.end(file);
+	return { file: file };
+}
+
+function handleListing(url, pathname){
+	var template = getTemplate('index.tmpl');
+		stats = fs.statSync(pathname),
+		ls = fs.readdirSync(pathname),
+		listing = [];
+
+	for (var i in ls){
+		var name = ls[i],
+			stats = fs.statSync(path.normalize(pathname + '/' + name)),
+			uri = url.pathname == '/' ? name : url.pathname + '/' + name;
+		listing.push({ name: name, ctime: stats.ctime, size: stats.size, uri: uri });
+	}
+
+	return { file: tmpl(template, { listing: listing, url: url.pathname }) };
+}
+
+function handleNotFound(url){
+	var code = 200, file;
+	
+	if (url.pathname == options.reset){
+		var pathname = path.resolve(__dirname, '.' + url.pathname);
+		if (path.existsSync(pathname))
+			file = fs.readFileSync(pathname, 'utf8');
+	}
+	
+	if (!file){
+		code = 404;
+		var template = getTemplate('404.tmpl');
+		file = tmpl(template, { url: url.pathname });
+	}
+	
+	return { code: code, file: file };
+}
+
+function setOptions(opts){
+	for (var i in opts){
+		options[i] = opts[i];
+	}
 }
 
 module.exports = function(opts){
-	opts = opts || {};
-	for (var i in opts)
-		if (opts[i])
-			options[i] = opts[i];
+	setOptions(opts || {});
 	
 	var httpserver = http.createServer(listener);
 	httpserver.listen(options.port, options.host);
