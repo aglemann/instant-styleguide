@@ -16,12 +16,30 @@ function listener(request, response){
 		pathname = pwd + unescape(url.pathname),
 		returns;
 	
-	if (path.existsSync(pathname))
-		returns = fs.statSync(pathname).isFile() ? handleFile(url, pathname)
-			: handleListing(url, pathname);		
+	if (path.existsSync(pathname)){
+		var stats = fs.statSync(pathname);
+		
+		if (stats.isFile()){
+			if (/\.(gif|jpg|png)$/.test(url.pathname)){
+				fs.createReadStream(pathname, { flags: 'r', mode: 0666, bufferSize: 4 * 1024})
+					.addListener('data', function(chunk){
+						response.write(chunk, 'binary');
+					})
+					.addListener('close',function(){
+						response.end();
+					});
+				return;
+			}
+			
+			returns = handleFile(url, pathname);
+		}
+		else {
+			returns = handleListing(url, pathname);
+		}
+	}
 	else
 		returns = handleNotFound(url);
-		
+	
 	response.writeHead(returns.code || 200);
 	response.end(returns.file);
 }
@@ -35,24 +53,12 @@ function getTemplate(templateName){
 }
 
 function handleFile(url, pathname){
-	if (/\.(gif|jpg|png)$/.test(url.pathname)){
-		fs.createReadStream(pathname, { flags: 'r', mode: 0666, bufferSize: 4 * 1024})
-			.addListener('data', function(chunk){
-				response.write(chunk, 'binary');
-			})
-			.addListener('close',function(){
-				response.end();
-			});
-		return;
-	}
-
 	var file = fs.readFileSync(pathname, 'utf8');
 
 	if (/\.css$/.test(url.pathname) && !url.query.raw){
 		var template = getTemplate('stylesheet.tmpl');
 			style = unescape(url.pathname).replace(/.*?([^\/]+)\.css$/, '$1');			
 		file = tmpl(template, { html: css2html(file, { expand: options.expand, out: 'html', populate: true, tags: options.tags }), reset: options.reset, style: style, url: url.pathname });
-		// response.setHeader('Content-Type', 'text/html');
 	}
 	
 	return { file: file };
