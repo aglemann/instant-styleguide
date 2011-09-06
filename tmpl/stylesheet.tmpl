@@ -15,9 +15,13 @@
 		</style>
 		<script type="text/javascript">
 			function instaguide(){
-				for (var nodes = document.body.childNodes, i = 2; i < nodes.length; i++){
-					var node = nodes[i];
-					if (node.nodeType == 1){
+				for (var nodes = document.body.childNodes, i = 0; i < nodes.length; i++){
+					var node = nodes[i],
+						isTag = node.nodeType == 1,
+						isTmplChrome = /^instaguide/.test(node.className),
+						isPIEChrome = /^css3/.test(node.tagName);
+						
+					if (isTag && !isTmplChrome && !isPIEChrome){
 						var wrapper = document.createElement('div');
 						wrapper.className = 'instaguide-rule';
 						document.body.replaceChild(wrapper, node);
@@ -30,11 +34,14 @@
 
 						node.onmouseover = (function(label, node){
 							return function(e){
-								label.innerHTML = e.target.getAttribute('data-selector');
+								var e = e || window.event,
+									target = e.target || e.srcElement,
+									html = target && target.getAttribute('data-selector');
+								label.innerHTML = html || node.getAttribute('data-selector');
 							}
 						})(label, node);
 						node.mouseout = (function(label, node){
-							return function(e){
+							return function(){
 								label.innerHTML = node.getAttribute('data-selector');
 							}
 						})(label, node);
