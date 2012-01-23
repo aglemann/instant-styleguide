@@ -22,6 +22,6 @@ A message should appear:
 
 	Server listening on http://localhost:8124
 
-If you open that URL in your browser you should now be able to browser your CSS.
+If you open that URL in your browser you should now be able to browse your CSS.
 
 ### Options

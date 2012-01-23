@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Index of <%=url%></title>
-		<link rel="stylesheet" href="<%=reset%>?raw=1">
+		<link rel="stylesheet" href="/resources/normalize.min.css">
 		<link rel="stylesheet" href="<%=url%>?raw=1">
 		<style type="text/css">
 			.instaguide { background: #d7d7d7; }
@@ -13,6 +13,7 @@
 			.instaguide-rule:before { content: ""; display: table; }
 			.instaguide-rule:after { clear: both; content: ""; display: table; }
 		</style>
+		<script type="text/javascript" src="/resources/zepto.min.js"></script>
 		<script type="text/javascript">
 			function instaguide(){
 				for (var nodes = document.body.childNodes, i = 0; i < nodes.length; i++){

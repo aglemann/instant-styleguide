@@ -1,6 +1,6 @@
 {
   "name": "instant-styleguide",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Instantly present CSS stylesheets as HTML styleguides.",
   "keywords": ["css", "stylesheet", "css2html", "styleguide", "instaguide", "instant styleguide"],
   "homepage": "https://github.com/aglemann/instant-styleguide",
@@ -8,7 +8,7 @@
   "files": ["css", "lib", "tmpl"],
   "main": "main",
   "directories": {
-	"css": "./css",
+    "css": "./css",
     "lib": "./lib",	
     "tmpl": "./tmpl"
   },
@@ -17,6 +17,6 @@
     "url": "git://github.com/aglemann/instant-styleguide.git"
   },
   "engines": {
-    "node": "~v0.4.10"
+    "node": "~v0.4.9"
   }
 }
